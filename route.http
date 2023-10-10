@@ -1,0 +1,139 @@
+POST http://localhost:3000/usuario
+Content-Type: application/json
+
+{
+  "nome": "Juliet",
+  "email": "juliet@sim.com",
+  "senha": "123456"
+}
+
+### LOGIN
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "juliet@sim.com",
+  "senha": "123456"
+}
+
+### DETALHAR USUARIO
+
+GET http://localhost:3000/usuario
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY2ODM4NTUsImV4cCI6MTY5NjY4NzQ1NX0.w7wjclXEJ_Q6OEPCrZMciY_PfH1m-4HnyxZfMjrHeUU
+
+### ATUALIZA DADOS CADASTRADOS
+
+PUT http://localhost:3000/usuario
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY2ODM4NTUsImV4cCI6MTY5NjY4NzQ1NX0.w7wjclXEJ_Q6OEPCrZMciY_PfH1m-4HnyxZfMjrHeUU
+Content-Type: application/json
+
+{
+  "nome": "John Doe",
+  "email": "johnny@sim.com",
+  "senha": "123456"
+}
+
+###
+
+
+
+
+
+### Categorias
+
+GET http://localhost:3000/categoria
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3MTczMTgsImV4cCI6MTY5NjcyMDkxOH0.b-MubWfeUn_k7YtXIiBH4YX4FXXPSsc-eytNjti4TJo
+
+###
+
+
+
+
+
+### Transacao Lista todas ? se não filtra
+
+GET http://localhost:3000/transacao/?categoria=Alimentação
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3NzE4OTQsImV4cCI6MTY5Njc3NTQ5NH0.He6SJyF4xvj3Q0NRNQkYkJ1WAIaDxSZPC5IdRdY6gB8
+
+### CONSULTA TRANSACAO POR ID refazer
+
+GET http://localhost:3000/transacao/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3MTgzMTUsImV4cCI6MTY5NjcyMTkxNX0.WkccDa7OSrALBN6ygRv3WpJ3EWV3W65PIFQSe1HETB0
+
+### CADASTRAR TRANSACAO
+
+POST http://localhost:3000/transacao
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3NzAzMDIsImV4cCI6MTY5Njc3MzkwMn0.Vaae9IsRt_iSysBvADrILIk3jXEcPBSEv1VbkaCfcFA
+Content-Type: application/json
+
+{
+    "tipo": "entrada",
+    "descricao": "Debito",
+    "valor": 300000,
+    "data": "2022-03-24T15:30:00.000Z",
+    "categoria_id": 2
+}
+
+### ATUALIZAR TRANSACAO
+
+PUT http://localhost:3000/transacao/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3MjE5OTEsImV4cCI6MTY5NjcyNTU5MX0.0Fz-nWd0nNKJg53i7Uh4_DKzR-Ca5jxVDOntwgRgJ68
+Content-Type: application/json
+
+{
+    "descricao": "tanto faz",
+    "valor": 300000,
+    "data": "2022-03-24T15:30:00.000Z",
+    "categoria_id": 1,
+    "tipo": "saida"
+}
+
+
+###
+
+DELETE http://localhost:3000/transacao/25
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3Mzc0MTIsImV4cCI6MTY5Njc0MTAxMn0.JPxXdODxges-1T0fEBWV3-Z-xSbL-rVvFUyPYlRm7lM
+
+### EXTRATO DE TRANSAÇÕES
+
+GET http://localhost:3000/transacao/extrato
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE2OTY3NzAzMDIsImV4cCI6MTY5Njc3MzkwMn0.Vaae9IsRt_iSysBvADrILIk3jXEcPBSEv1VbkaCfcFA
+
+###
+
+### cadastros prontos
+{
+  "email": "john@sim.com",
+  "senha": "123456"
+}
+
+{
+  "nome": "Romeu Sam",
+  "email": "hoder@sim.com",
+  "senha": "123456"
+}
+
+{
+  "nome": "Juliet",
+  "email": "juliet@sim.com",
+  "senha": "123456"
+}
+
+{
+  "nome": "Erica",
+  "email": "erica@sima.coms",
+  "senha": "123456"
+}
+
+{
+  "nome": "John Doe",
+  "email": "johnny@sim.com",
+  "senha": "123456"
+}
+
+{
+  "nome": "john doea",
+  "email": "hoder@sima.coms",
+  "senha": "123456a"
+}
