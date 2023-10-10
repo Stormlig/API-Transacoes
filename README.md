@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# API de Controle Financeiro 
+# API de Controle Financeiro - Dindin
 
 ## Descrição
 
@@ -59,98 +59,118 @@ A seguir estão os principais endpoints da API com exemplos de uso:
 
   ```json
   {
-    "nome": "José",
-    "email": "jose@email.com",
-    "senha": "123456"
+      "nome": "José",
+      "email": "jose@email.com",
+      "senha": "123456"
   }
+
+
+<h1>Fazer Login</h1>
+
+<p><strong>POST /login</strong></p>
+
+<p>Permite que um usuário cadastrado faça login no sistema.</p>
+
+<p>Exemplo de requisição:</p>
+
+```json
+  
+  {
+      "email": "jose@email.com",
+      "senha": "123456"
+  }
+
+```
+<h1>Detalhar Perfil do Usuário Logado</h1>
+
+<p><strong>GET /usuario</strong></p>
+
+<p>Obtém os dados do perfil do usuário logado.</p>
+
+<h1>Editar Perfil do Usuário Logado</h1>
+
+<p><strong>PUT /usuario</strong></p>
+
+<p>Permite que o usuário logado edite seu próprio perfil.</p>
+
+<p>Exemplo de requisição:</p>
+
+
+  ```js
+{
+    "nome": "José de Abreu",
+    "email": "jose_abreu@email.com",
+    "senha": "j4321"
+}
   ```
-### Fazer Login
-**Rota:** `POST /login`
-**Requisição:**
-Corpo (body) com as propriedades:
-- email
-- senha
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá um objeto com a propriedade `token`, que contém o token de autenticação, e a propriedade `usuario`, que contém as informações do usuário autenticado (exceto a senha).
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
 
-**Nota:** A partir deste ponto, todas as funcionalidades requerem o token de autenticação do usuário logado, enviado no cabeçalho com o formato "Bearer Token".
+<h1>Listar Categorias</h1>
 
-### Detalhar Perfil do Usuário Logado
-**Rota:** `GET /usuario`
-**Requisição:**
-Sem parâmetros de rota ou de consulta.
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá um objeto representando o usuário encontrado (exceto a senha).
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p><strong>GET /categoria</strong></p>
 
-### Editar Perfil do Usuário Logado
-**Rota:** `PUT /usuario`
-**Requisição:**
-Corpo (body) com as propriedades:
-- nome
-- email
-- senha
-**Resposta:**
-Em caso de sucesso, não haverá conteúdo no corpo (body) da resposta.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p>Lista todas as categorias cadastradas no sistema.</p>
 
-### Listar Categorias
-**Rota:** `GET /categoria`
-**Requisição:**
-Sem parâmetros de rota ou de consulta.
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá um array com objetos representando as categorias cadastradas.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<h1>Listar Transações do Usuário Logado</h1>
 
-### Listar Transações do Usuário Logado
-**Rota:** `GET /transacao`
-**Requisição:**
-Sem parâmetros de rota ou de consulta.
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá um array com objetos representando as transações do usuário logado.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p><strong>GET /transacao</strong></p>
 
-### Detalhar uma Transação do Usuário Logado
-**Rota:** `GET /transacao/:id`
-**Requisição:**
-Deverá ser enviado o ID da transação no parâmetro de rota.
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá um objeto representando a transação encontrada.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p>Lista todas as transações associadas ao usuário logado.</p>
 
-### Cadastrar Transação para o Usuário Logado
-**Rota:** `POST /transacao`
-**Requisição:**
-Corpo (body) com as propriedades:
-- descricao
-- valor
-- data
-- categoria_id
-- tipo (entrada ou saida)
-**Resposta:**
-Em caso de sucesso, o corpo (body) da resposta conterá as informações da transação cadastrada, incluindo seu ID.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<h1>Detalhar Transação do Usuário Logado</h1>
 
-### Atualizar Transação do Usuário Logado
-**Rota:** `PUT /transacao/:id`
-**Requisição:**
-Corpo (body) com as propriedades a serem atualizadas.
-**Resposta:**
-Em caso de sucesso, não haverá conteúdo no corpo (body) da resposta.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p><strong>GET /transacao/:id</strong></p>
 
-### Excluir Transação do Usuário Logado
-**Rota:** `DELETE /transacao/:id`
-**Requisição:**
-Deverá ser enviado o ID da transação no parâmetro de rota.
-**Resposta:**
-Em caso de sucesso, não haverá conteúdo no corpo (body) da resposta.
-Em caso de falha na validação, a resposta terá um status code apropriado e um objeto com uma propriedade `mensagem` explicando a falha.
+<p>Obtém detalhes de uma transação específica associada ao usuário logado.</p>
 
-### Testes Automatizados
-A API dindin inclui testes automatizados para garantir a integridade das funcionalidades. Para executar os testes, você pode usar o seguinte comando:
+<h1>Cadastrar Transação do Usuário Logado</h1>
 
-```bash
-npm test
+<p><strong>POST /transacao</strong></p>
 
+<p>Permite que o usuário logado cadastre uma nova transação.</p>
+
+<p>Exemplo de requisição:</p>
+
+  ```js
+{
+    "tipo": "entrada",
+    "descricao": "Salário",
+    "valor": 300000,
+    "data": "2022-03-24T15:30:00.000Z",
+    "categoria_id": 6
+}
+```
+
+<h1>Atualizar Transação do Usuário Logado</h1>
+
+<p><strong>PUT /transacao/:id</strong></p>
+
+<p>Permite que o usuário logado atualize uma transação específica.</p>
+
+<p>Exemplo de requisição:</p>
+
+<pre>
+<code>{
+    "descricao": "Sapato amarelo",
+    "valor": 15800,
+    "data": "2022-03-23 12:35:00",
+    "categoria_id": 4,
+    "tipo": "saida"
+}</code>
+</pre>
+
+<h1>Excluir Transação do Usuário Logado</h1>
+
+<p><strong>DELETE /transacao/:id</strong></p>
+
+<p>Permite que o usuário logado exclua uma transação específica.</p>
+
+<h1>Obter Extrato de Transações do Usuário Logado</h1>
+
+<p><strong>GET /transacao/extrato</strong></p>
+
+<p>Obtém um resumo das transações do usuário, incluindo o total de entradas e saídas.</p>
+
+
+
+<p>
+Fique à vontade para entrar em contato caso tenha alguma dúvida ou sugestão!</p>
