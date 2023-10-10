@@ -13,7 +13,6 @@ Esta é uma API RESTful desenvolvida em equipe para fornecer funcionalidades de 
 - PostgreSQL
 - Bcrypt (para criptografar senhas)
 - JSON Web Tokens (JWT) (para autenticação)
-- Knex.js (para consulta ao banco de dados)
 - Outras bibliotecas e dependências relevantes
 
 ## Princípios de Arquitetura
