@@ -17,7 +17,7 @@ Esta é uma API RESTful desenvolvida em equipe para fornecer funcionalidades de 
 
 ## Princípios de Arquitetura
 
-Este projeto foi desenvolvido com foco no Princípio da Responsabilidade Única (SRP) para manter o código mais organizado e legível.
+Neste projeto, o Princípio da Responsabilidade Única (SRP) foi o foco principal da arquitetura, buscando manter o código organizado e legível. No entanto, houve momentos em que a flexibilidade se tornou necessária para garantir a harmonia e a eficácia do sistema.
 
 ## Banco de Dados
 
