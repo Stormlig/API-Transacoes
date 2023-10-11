@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# API de Controle Financeiro - Dindin
+# API de Controle Financeiro 
 
 ## Descrição
 
