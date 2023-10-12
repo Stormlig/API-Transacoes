@@ -1,6 +1,6 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# API de Controle Financeiro 
+# API de Controle Financeiro
 
 ## Descrição
 
@@ -65,113 +65,104 @@ A seguir estão os principais endpoints da API com exemplos de uso:
       "senha": "123456"
   }
 
+### Fazer Login
 
-<h1>Fazer Login</h1>
+- **POST** `/login`
 
-<p><strong>POST /login</strong></p>
+  Permite que um usuário cadastrado faça login no sistema.
 
-<p>Permite que um usuário cadastrado faça login no sistema.</p>
+  Exemplo de requisição:
 
-<p>Exemplo de requisição:</p>
-
-```json
-  
+  ```json
   {
       "email": "jose@email.com",
       "senha": "123456"
   }
 
-```
-<h1>Detalhar Perfil do Usuário Logado</h1>
+### Detalhar Perfil do Usuário Logado
 
-<p><strong>GET /usuario</strong></p>
+- **GET** `/usuario`
 
-<p>Obtém os dados do perfil do usuário logado.</p>
+  Obtém os dados do perfil do usuário logado.
 
-<h1>Editar Perfil do Usuário Logado</h1>
+### Editar Perfil do Usuário Logado
 
-<p><strong>PUT /usuario</strong></p>
+- **PUT** `/usuario`
 
-<p>Permite que o usuário logado edite seu próprio perfil.</p>
+  Permite que o usuário logado edite seu próprio perfil.
 
-<p>Exemplo de requisição:</p>
+  Exemplo de requisição:
 
+  ```json
+  {
+      "nome": "José de Abreu",
+      "email": "jose_abreu@email.com",
+      "senha": "j4321"
+  }
 
-  ```js
-{
-    "nome": "José de Abreu",
-    "email": "jose_abreu@email.com",
-    "senha": "j4321"
-}
-  ```
+### Listar Categorias
 
-<h1>Listar Categorias</h1>
+- **GET** `/categoria`
 
-<p><strong>GET /categoria</strong></p>
+  Lista todas as categorias cadastradas no sistema.
 
-<p>Lista todas as categorias cadastradas no sistema.</p>
+### Listar Transações do Usuário Logado
 
-<h1>Listar Transações do Usuário Logado</h1>
+- **GET** `/transacao`
 
-<p><strong>GET /transacao</strong></p>
+  Lista todas as transações associadas ao usuário logado.
 
-<p>Lista todas as transações associadas ao usuário logado.</p>
+### Detalhar Transação do Usuário Logado
 
-<h1>Detalhar Transação do Usuário Logado</h1>
+- **GET** `/transacao/:id`
 
-<p><strong>GET /transacao/:id</strong></p>
+  Obtém detalhes de uma transação específica associada ao usuário logado.
 
-<p>Obtém detalhes de uma transação específica associada ao usuário logado.</p>
+### Cadastrar Transação do Usuário Logado
 
-<h1>Cadastrar Transação do Usuário Logado</h1>
+- **POST** `/transacao`
 
-<p><strong>POST /transacao</strong></p>
+  Permite que o usuário logado cadastre uma nova transação.
 
-<p>Permite que o usuário logado cadastre uma nova transação.</p>
+  Exemplo de requisição:
 
-<p>Exemplo de requisição:</p>
+  ```json
+  {
+      "tipo": "entrada",
+      "descricao": "Salário",
+      "valor": 300000,
+      "data": "2022-03-24T15:30:00.000Z",
+      "categoria_id": 6
+  }
 
-  ```js
-{
-    "tipo": "entrada",
-    "descricao": "Salário",
-    "valor": 300000,
-    "data": "2022-03-24T15:30:00.000Z",
-    "categoria_id": 6
-}
-```
+### Atualizar Transação do Usuário Logado
 
-<h1>Atualizar Transação do Usuário Logado</h1>
+- **PUT** `/transacao/:id`
 
-<p><strong>PUT /transacao/:id</strong></p>
+  Permite que o usuário logado atualize uma transação específica.
 
-<p>Permite que o usuário logado atualize uma transação específica.</p>
+  Exemplo de requisição:
 
-<p>Exemplo de requisição:</p>
+  ```json
+  {
+      "descricao": "Sapato amarelo",
+      "valor": 15800,
+      "data": "2022-03-23 12:35:00",
+      "categoria_id": 4,
+      "tipo": "saida"
+  }
 
-<pre>
-<code>{
-    "descricao": "Sapato amarelo",
-    "valor": 15800,
-    "data": "2022-03-23 12:35:00",
-    "categoria_id": 4,
-    "tipo": "saida"
-}</code>
-</pre>
+### Excluir Transação do Usuário Logado
 
-<h1>Excluir Transação do Usuário Logado</h1>
+- **DELETE** `/transacao/:id`
 
-<p><strong>DELETE /transacao/:id</strong></p>
+  Permite que o usuário logado exclua uma transação específica.
 
-<p>Permite que o usuário logado exclua uma transação específica.</p>
+### Obter Extrato de Transações do Usuário Logado
 
-<h1>Obter Extrato de Transações do Usuário Logado</h1>
+- **GET** `/transacao/extrato`
 
-<p><strong>GET /transacao/extrato</strong></p>
+  Obtém um resumo das transações do usuário, incluindo o total de entradas e saídas.
 
-<p>Obtém um resumo das transações do usuário, incluindo o total de entradas e saídas.</p>
+Fique à vontade para entrar em contato caso tenha alguma dúvida ou sugest
 
-
-
-<p>
-Fique à vontade para entrar em contato caso tenha alguma dúvida ou sugestão!</p>
