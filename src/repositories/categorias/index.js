@@ -1,27 +1,27 @@
-const { pool } = require('../../database/conexao.js');
+const { db } = require('../../database/conexao.js');
 
 class RepositorioCategorias {
-  EncontraCategoriaPorIdRepository = async (categoria_id) => {
-    const query = `SELECT * FROM categorias WHERE id = $1`;
+  async EncontraCategoriaPorIdRepository(categoria_id) {
+    try {
+      const resultado = await db('categorias')
+        .where('id', categoria_id)
+        .first();
 
-    const valor = [categoria_id];
-
-    const resultado = await pool.query(query, valor);
-
-    if (resultado.rows.length > 0) {
-      return resultado.rows[0];
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
     }
+  }
 
-    return null;
-  };
+  async EncontraCategoriaRepository() {
+    try {
+      const resultado = await db('categorias');
 
-  EncontraCategoriaRepository = async () => {
-    const query = `SELECT * FROM categorias`;
-
-    const resultado = await pool.query(query);
-
-    return resultado.rows;
-  };
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = RepositorioCategorias;

@@ -1,70 +1,50 @@
-const { pool } = require('../../database/conexao.js');
+const { db } = require('../../database/conexao.js'); // Certifique-se de que 'db' seja uma instância válida do Knex
 
 class RepositorioUsuarios {
-  EncontrarEmailRepository = async (email) => {
+  async EncontrarEmailRepository(email) {
     try {
-      const query = `SELECT * FROM usuarios WHERE email = $1`;
+      const resultado = await db('usuarios').where({ email }).first();
 
-      const valor = [email];
-
-      const resultado = await pool.query(query, valor);
-
-      return resultado.rows[0];
+      return resultado;
     } catch (error) {
       throw new Error(error);
     }
-  };
+  }
 
-  EncontraUsuarioPorIdRepository = async (userId) => {
-    const query = `SELECT * FROM usuarios
-      WHERE id = $1`;
-
-    const valor = [userId];
-
-    const resultado = await pool.query(query, valor);
-
-    return resultado.rows[0];
-  };
-
-  CadastrarUsuarioRepository = async (nome, email, senhaHash) => {
+  async EncontraUsuarioPorIdRepository(userId) {
     try {
-      const query = `INSERT INTO usuarios
-      (nome, email, senha)
-      VALUES ($1, $2, $3) RETURNING *`;
+      const resultado = await db('usuarios').where({ id: userId }).first();
 
-      const valores = [nome, email, senhaHash];
-
-      const resultado = await pool.query(query, valores);
-
-      return resultado.rows[0];
+      return resultado;
     } catch (error) {
       throw new Error(error);
     }
-  };
+  }
 
-  LoginRepository = async (email) => {
-    const query = `
-      SELECT * FROM usuarios
-      WHERE email = $1`;
+  async CadastrarUsuarioRepository(nome, email, senhaHash) {
+    try {
+      const resultado = await db('usuarios')
+        .insert({ nome, email, senha: senhaHash })
+        .returning('*');
 
-    const valores = [email];
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
-    const resultado = await pool.query(query, valores);
+  async AtualizarUsuarioRepository({ nome, email, senhaHash }, userId) {
+    try {
+      const resultado = await db('usuarios')
+        .where({ id: userId })
+        .update({ nome, email, senha: senhaHash })
+        .returning('*');
 
-    return resultado.rows[0];
-  };
-
-  AtualizarUsuarioRepository = async ({ nome, email, senhaHash }, userId) => {
-    const query = `UPDATE usuarios
-      SET nome = $1, email = $2, senha = $3
-      WHERE id = $4`;
-
-    const valores = [nome, email, senhaHash, userId];
-
-    const resultado = await pool.query(query, valores);
-
-    return resultado.rows[0];
-  };
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = RepositorioUsuarios;

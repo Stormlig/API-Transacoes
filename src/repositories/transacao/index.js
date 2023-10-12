@@ -1,93 +1,60 @@
-const { pool } = require('../../database/conexao.js');
+const { db } = require('../../database/conexao.js'); // Certifique-se de que 'db' seja uma instância válida do Knex
 
 class RepositorioTransacoes {
-  EncontraTransacaoRepository = async (userId) => {
-    const query = `SELECT * FROM transacoes WHERE usuario_id = $1 `;
+  async EncontraTransacaoRepository(userId) {
+    const transacoes = await db('transacoes').where('usuario_id', userId);
+    return transacoes;
+  }
 
-    const valor = [userId];
+  async EncontrarTransacaoPorIdRepository(userId, transacaoId) {
+    const transacao = await db('transacoes')
+      .where({ usuario_id: userId, id: transacaoId })
+      .first();
+    return transacao;
+  }
 
-    const resultado = await pool.query(query, valor);
+  async DeletaTransacaoRepository(userId, transacaoId) {
+    const numDeletados = await db('transacoes')
+      .where({ id: transacaoId, usuario_id: userId })
+      .del();
+    return numDeletados;
+  }
 
-    return resultado.rows;
-  };
+  async CadastrarTransacaoRepository(dadosDaTransacao, userId) {
+    const [novoRegistro] = await db('transacoes')
+      .insert({
+        descricao: dadosDaTransacao.descricao,
+        valor: dadosDaTransacao.valor,
+        data: dadosDaTransacao.data,
+        categoria_id: dadosDaTransacao.categoria_id,
+        tipo: dadosDaTransacao.tipo,
+        usuario_id: userId,
+      })
+      .returning('*');
+    return novoRegistro;
+  }
 
-  EncontrarTransacaoPorIdRepository = async (userId, transacaoId) => {
-    const query = `SELECT * FROM transacoes WHERE usuario_id = $1 AND id = $2 `;
+  async AtualizarTransacaoRepository(transacaoId, dadosDaTransacao, userId) {
+    const [registroAtualizado] = await db('transacoes')
+      .where({ id: transacaoId, usuario_id: userId })
+      .update({
+        descricao: dadosDaTransacao.descricao,
+        valor: dadosDaTransacao.valor,
+        data: dadosDaTransacao.data,
+        categoria_id: dadosDaTransacao.categoria_id,
+        tipo: dadosDaTransacao.tipo,
+      })
+      .returning('*');
+    return registroAtualizado;
+  }
 
-    const valor = [userId, transacaoId];
-
-    const resultado = await pool.query(query, valor);
-
-    return resultado.rows[0];
-  };
-
-  DeletaTransacaoRepository = async (userId, transacaoId) => {
-    const query = `
-        DELETE FROM transacoes
-        WHERE id = $1
-        AND usuario_id = $2
-      `;
-
-    const valores = [transacaoId, userId];
-
-    const resultado = await pool.query(query, valores);
-
-    return resultado.rowCount;
-  };
-
-  CadastrarTransacaoRepository = async (dadosDaTransacao, userId) => {
-    const { descricao, valor, data, categoria_id, tipo } = dadosDaTransacao;
-
-    const query = `INSERT INTO transacoes
-      (descricao, valor, data, categoria_id, tipo, usuario_id)
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
-
-    const valores = [descricao, valor, data, categoria_id, tipo, userId];
-
-    const resultado = await pool.query(query, valores);
-
-    return resultado.rows[0];
-  };
-
-  AtualizarTransacaoRepository = async (
-    transacaoId,
-    dadosDaTransacao,
-    userId,
-  ) => {
-    const { descricao, valor, data, categoria_id, tipo } = dadosDaTransacao;
-
-    const query = `
-        UPDATE transacoes
-        SET descricao = $1, valor = $2, data = $3, categoria_id = $4, tipo = $5
-        WHERE id = $6 AND usuario_id = $7`;
-
-    const valores = [
-      descricao,
-      valor,
-      data,
-      categoria_id,
-      tipo,
-      transacaoId,
-      userId,
-    ];
-
-    const resultado = await pool.query(query, valores);
-
-    return resultado.rows[0];
-  };
-
-  ListaTransacaoRepository = async (userId, filtro) => {
-    const query =
-      filtro !== undefined
-        ? 'SELECT * FROM transacoes WHERE usuario_id = $1 AND categoria_id = $2'
-        : 'SELECT * FROM transacoes WHERE usuario_id = $1';
-
-    const valores = filtro !== undefined ? [userId, filtro] : [userId];
-
-    const resultado = await pool.query(query, valores);
-
-    return resultado.rows;
-  };
+  async ListaTransacaoRepository(userId, filtro) {
+    let query = db('transacoes').where('usuario_id', userId);
+    if (filtro !== undefined) {
+      query = query.where({ categoria_id: filtro });
+    }
+    return query;
+  }
 }
 
 module.exports = RepositorioTransacoes;

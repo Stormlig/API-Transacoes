@@ -7,8 +7,7 @@ const { CryptografaSenha } = require('../../utils/CryptografaSenha.js');
 const CadastrarUsuarioService = async (dadosDoUsuario) => {
   const { nome, email, senha } = dadosDoUsuario;
 
-  const emailDuplicado =
-    await repoUsuarios.EncontraUsuarioPorIdRepository(email);
+  const emailDuplicado = await repoUsuarios.EncontrarEmailRepository(email);
 
   if (emailDuplicado) {
     throw new Error('Já existe uma conta cadastrada com esse email');

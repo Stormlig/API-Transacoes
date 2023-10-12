@@ -11,9 +11,7 @@ const LoginService = async ({ email, senha }) => {
 
   await ComparaSenha(senha, emailEncontrado.senha);
 
-  const resultado = await repoUsuarios.LoginRepository(email);
-
-  return resultado;
+  return emailEncontrado;
 };
 
 module.exports = { LoginService };
