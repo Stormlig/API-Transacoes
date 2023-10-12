@@ -1,4 +1,4 @@
-const verificaParametroVazios = (req, res, next) => {
+const VerificaParametroVazios = (req, res, next) => {
   const { id } = req.params;
   if (!id || id.trim() === '') {
     throw new Error(`Informe um valor válido para ${id}`);
@@ -7,4 +7,4 @@ const verificaParametroVazios = (req, res, next) => {
   next();
 };
 
-module.exports = { verificaParametroVazios };
+module.exports = { VerificaParametroVazios };

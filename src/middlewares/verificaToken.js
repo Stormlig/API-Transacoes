@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = require('../env/SecretKey.js');
 
-const verificaToken = async (req, res, next) => {
+const VerificaToken = async (req, res, next) => {
   const token = req.header('Authorization');
 
   if (!token) {
@@ -27,4 +27,4 @@ const verificaToken = async (req, res, next) => {
   }
 };
 
-module.exports = { verificaToken };
+module.exports = { VerificaToken };

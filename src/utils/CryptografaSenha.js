@@ -1,15 +1,11 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 const CryptografaSenha = async (senha) => {
-  try {
-    const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);
 
-    const hash = await bcrypt.hash(senha, salt);
+  const hash = await bcrypt.hash(senha, salt);
 
-    return hash;
-  } catch (error) {
-    throw error;
-  }
+  return hash;
 };
 
 module.exports = { CryptografaSenha };

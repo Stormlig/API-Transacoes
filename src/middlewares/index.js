@@ -1,9 +1,11 @@
-const { verificaCamposVazios } = require('./verificaCamposVazios');
-const { verificaParametroVazios } = require('./verificaParametroVazio');
-const { verificaToken } = require('./verificaToken');
+const { ValidaTipo } = require('./ValidaTipo');
+const { VerificaCamposVazios } = require('./VerificaCamposVazios');
+const { VerificaParametroVazios } = require('./VerificaParametroVazio');
+const { VerificaToken } = require('./VerificaToken');
 
 module.exports = {
-  verificaCamposVazios,
-  verificaParametroVazios,
-  verificaToken,
+  VerificaCamposVazios,
+  VerificaParametroVazios,
+  VerificaToken,
+  ValidaTipo,
 };

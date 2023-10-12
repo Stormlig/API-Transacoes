@@ -1,4 +1,4 @@
-const verificaCamposVazios = (req, res, next) => {
+const VerificaCamposVazios = (req, res, next) => {
   const analisar_campos = req.body;
 
   let campo_vazio = null;
@@ -19,4 +19,4 @@ const verificaCamposVazios = (req, res, next) => {
   next();
 };
 
-module.exports = { verificaCamposVazios };
+module.exports = { VerificaCamposVazios };
