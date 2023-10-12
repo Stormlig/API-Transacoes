@@ -14,7 +14,7 @@ const {
   ListaTransacaoController,
   ListaTransacaoPorIdController,
 } = require('../controllers/transacao');
-const { ListaCategoriasController } = require('../controllers/funcionalidades');
+const { ListaCategoriasController } = require('../controllers/categorias');
 const { VerificaToken, ValidaTipo } = require('../middlewares');
 
 const router = express.Router();
