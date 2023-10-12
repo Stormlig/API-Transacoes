@@ -5,6 +5,12 @@ const repoUsuarios = new RepositorioUsuarios();
 const AtualizaUsuarioService = async (dadosDoUsuario, userId) => {
   const { nome, email, senha } = dadosDoUsuario;
 
+  const emailDuplicado = await repoUsuarios.EncontrarEmailRepository(email);
+
+  if (emailDuplicado) {
+    throw new Error('Já existe uma conta cadastrada com esse email');
+  }
+
   const senhaHash = await CryptografaSenha(senha);
 
   const resultado = await repoUsuarios.AtualizarUsuarioRepository(
