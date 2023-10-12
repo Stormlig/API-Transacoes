@@ -31,13 +31,6 @@ const AtualizarTransacaoService = async (
     );
   }
 
-  if (
-    dadosDaTransacao.tipo !== 'entrada' &&
-    dadosDaTransacao.tipo !== 'saida'
-  ) {
-    throw new Error('Tipo da transação inválido');
-  }
-
   const resultado = await repoTransacoes.AtualizarTransacaoRepository(
     transacaoId,
     dadosDaTransacao,

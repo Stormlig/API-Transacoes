@@ -4,11 +4,8 @@ const repoTransacoes = new RepositorioTransacoes();
 const repoCategorias = new RepositorioCategorias();
 
 const CadastrarTransacaoService = async (dadosDaTransacao, userId) => {
-  const { tipo, categoria_id } = dadosDaTransacao;
+  const { categoria_id } = dadosDaTransacao;
 
-  if (tipo !== 'entrada' && tipo !== 'saida') {
-    throw new Error('Tipo da transação invalida');
-  }
 
   const existeIdCategoria =
     await repoCategorias.EncontraCategoriaPorIdRepository(categoria_id);
